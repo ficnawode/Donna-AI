@@ -38,17 +38,26 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col" onclick="sortTable('full_name')">Full Name</th>
-                            <th scope="col" onclick="sortTable('email')">Email</th>
-                            <th scope="col" onclick="sortTable('phone_number')">Phone Number</th>
-                            <th scope="col" onclick="sortTable('soft_skill_rating')">Soft Skill Rating</th>
-                            <th scope="col" onclick="sortTable('code_check')">Code Check</th>
-                            <th scope="col" onclick="sortTable('code_rating')">Code Rating</th>
-                            <th scope="col" onclick="sortTable('utest_rating')">Unit Test Check</th>
-                            <th scope="col" onclick="sortTable('total_rating')">Total Rating</th>
+                            <th scope="col" onclick="sortTable('full_name')">Full Name {{ '↓' if sort_by == 'full_name'
+                                else '' }}</th>
+                            <th scope="col" onclick="sortTable('email')">Email {{ '↓' if sort_by == 'email' else '' }}
+                            </th>
+                            <th scope="col" onclick="sortTable('phone_number')">Phone Number {{ '↓' if sort_by ==
+                                'phone_number' else '' }}</th>
+                            <th scope="col" onclick="sortTable('soft_skill_rating')">Soft Skill Rating {{ '↓' if sort_by
+                                == 'soft_skill_rating' else '' }}</th>
+                            <th scope="col" onclick="sortTable('code_check')">Code Check {{ '↓' if sort_by ==
+                                'code_check' else '' }}</th>
+                            <th scope="col" onclick="sortTable('code_rating')">Code Rating {{ '↓' if sort_by ==
+                                'code_rating' else '' }}</th>
+                            <th scope="col" onclick="sortTable('utest_rating')">Unit Test Check {{ '↓' if sort_by ==
+                                'utest_rating' else '' }}</th>
+                            <th scope="col" onclick="sortTable('total_rating')">Total Rating {{ '↓' if sort_by ==
+                                'total_rating' else '' }}</th>
                             <th scope="col">CV</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         {% for candidate in candidates %}
                         <tr>

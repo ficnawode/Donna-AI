@@ -132,7 +132,7 @@ def session_results(session_name):
     else:
         candidates.sort(key=lambda x: x.get('total_rating', 0), reverse=True)
 
-    return render_template('session_results.html', session_name=session_name, candidates=candidates, comp_reqs=comp_reqs)
+    return render_template('session_results.html', session_name=session_name, candidates=candidates, comp_reqs=comp_reqs, sort_by=sort_by)
 
 
 @bp.route('/conversation/')
