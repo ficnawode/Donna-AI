@@ -30,6 +30,14 @@
         </div>
     </nav>
     <!-- Main Content -->
+    <div id="loading-popup" class="loading-popup">
+        <div class="loading-dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+
     <div class="container mt-5 custom-container">
         <div class="custom-header rounded-top">
             <h2 class="text-center custom-title">Session: {{ session_name }}</h2>
@@ -65,10 +73,21 @@
         <button class="btn custom-btn btn-warning btn-lg ms-3" id="view-results-button">View Results</button>
     </div>
     <script>
+        // New functionality for loader
+        function displayLoader() {
+            document.getElementById('loading-popup').style.display = "block";
+        }
+
+        function removeLoader() {
+            document.getElementById('loading-popup').style.display = "none";
+        }
+
+        // Your original code
         var candidates = {{ candidates | tojson | safe }};
 
         $(document).ready(function () {
             $("#refresh-button").click(function () {
+                displayLoader();
                 $.ajax({
                     url: '/refresh_session',
                     method: 'POST',
@@ -78,6 +97,9 @@
                     contentType: 'application/json;charset=UTF-8',
                     success: function (response) {
                         location.reload();
+                    },
+                    complete: function () {
+                        removeLoader();
                     }
                 });
             });
@@ -93,6 +115,7 @@
                 }
 
                 if (candidatesNeedEvaluation) {
+                    displayLoader();
                     console.log('Candidates need evaluation');
                     $.ajax({
                         url: '/evaluate_session',
@@ -103,6 +126,9 @@
                         contentType: 'application/json;charset=UTF-8',
                         success: function (response) {
                             window.location.href = '/session_results/' + '{{ session_name }}';
+                        },
+                        complete: function () {
+                            removeLoader();
                         }
                     });
                 } else {
@@ -112,6 +138,7 @@
             });
         });
     </script>
+
 
 
 </body>
